@@ -1,10 +1,7 @@
 # NoteMark
 
 
-## Project Structure 
-
-### Auth Module 
-
+## Project Structure
 
 - root
   - core
