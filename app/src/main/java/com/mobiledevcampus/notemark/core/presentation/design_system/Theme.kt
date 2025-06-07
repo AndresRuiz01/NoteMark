@@ -32,6 +32,14 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+val AppColorScheme = lightColorScheme(
+    primary = Primary,
+    onPrimary = OnPrimary,
+    surface = Surface,
+    onSurface = OnSurface,
+    error = Error
+)
+
 @Composable
 fun NoteMarkTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
