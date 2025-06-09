@@ -1,5 +1,6 @@
 package com.mobiledevcampus.notemark.core.presentation.design_system
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -7,16 +8,24 @@ import androidx.compose.ui.unit.sp
 
 
 // Set of Material typography styles to start with
-val Typography = Typography(
-    // Titles
-    displayLarge = TextStyle(
+
+//fun MaterialTheme.Typography.titleXLarge(): TextStyle {
+//
+//}
+
+val Typography.titleXLarge: TextStyle
+    get() = TextStyle(
         fontFamily = SpaceGrotesk,
         fontWeight = FontWeight.Bold,
         fontSize = 36.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp
-    ),
-    displayMedium = TextStyle(
+    )
+
+val Typography = Typography(
+
+    //
+    titleLarge = TextStyle(
         fontFamily = SpaceGrotesk,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
