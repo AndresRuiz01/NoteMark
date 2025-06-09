@@ -29,11 +29,7 @@ class MainActivity : ComponentActivity() {
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
-                }
-                Text(
-                    text = "tester",
-                    style = MaterialTheme.typography.titleXLarge
-                )
+                }f
             }
         }
     }
