@@ -1,12 +1,27 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization")
 }
 
 android {
     namespace = "com.mobiledevcampus.notemark"
     compileSdk = 35
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.mobiledevcampus.notemark"
@@ -16,6 +31,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://notemark.pl-coding.com\"")
+        buildConfigField("String", "CAMPUS_EMAIL", "\"${localProperties.getProperty("campusEmail")}\"")
     }
 
     buildTypes {
@@ -58,5 +75,11 @@ dependencies {
 
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+    // Ktor
+    implementation(libs.bundles.ktor)
+    // Koin
+    implementation(libs.bundles.koin)
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
 
 }
