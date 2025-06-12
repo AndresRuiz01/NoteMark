@@ -18,7 +18,7 @@ class AuthRepositoryImpl(
 
     override suspend fun login(username: String, email: String, password: String): EmptyResult<DataError.Network> {
         val result = httpClient.post<LoginRequest, LoginResponse>(
-            route = "/login",
+            route = "/api/auth/login",
             body = LoginRequest(
                 username = username,
                 email = email,
@@ -38,7 +38,7 @@ class AuthRepositoryImpl(
 
     override suspend fun register(email: String, password: String): EmptyResult<DataError.Network> {
         return httpClient.post<RegisterRequest, Unit>(
-            route = "/register",
+            route = "/api/auth/register",
             body = RegisterRequest(
                 email = email,
                 password = password
