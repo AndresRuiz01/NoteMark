@@ -1,5 +1,7 @@
 package com.mobiledevcampus.notemark.auth.presentation
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,22 +10,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import com.mobiledevcampus.notemark.core.presentation.design_system.Inter
-import com.mobiledevcampus.notemark.core.presentation.design_system.NoteMarkTheme
 import com.mobiledevcampus.notemark.core.presentation.design_system.SpaceGrotesk
 import com.mobiledevcampus.notemark.core.presentation.design_system.Typography
 import com.mobiledevcampus.notemark.core.presentation.design_system.components.NoteMarkTextField
-import com.mobiledevcampus.notemark.core.presentation.design_system.titleXLarge
+import com.mobiledevcampus.notemark.core.presentation.design_system.OnPrimary
+import com.mobiledevcampus.notemark.core.presentation.design_system.OnSurface
+import com.mobiledevcampus.notemark.core.presentation.design_system.Primary
+import java.time.format.TextStyle
 
 @Composable
 fun LoginScreen(
@@ -36,21 +44,24 @@ fun LoginScreen(
     errorMessage: String? = null,
     modifier: Modifier = Modifier
 ) {
+    val isButtonEnabled = email.isNotBlank() && password.isNotBlank()
+
     Column(
         modifier = modifier
             .padding(16.dp)
-            .background(Color.White)
     ) {
         Text(
             text = "Log In",
             fontFamily = SpaceGrotesk,
-            style = Typography.titleLarge
+            style = Typography.titleLarge,
+            color = OnSurface
         )
 
         Text(
             text = "Capture your thoughts and ideas.",
             fontFamily = Inter,
-            style = Typography.bodySmall
+            style = Typography.bodySmall,
+            color = OnSurface
         )
 
         Spacer(
@@ -75,7 +86,7 @@ fun LoginScreen(
             text = password,
             onTextChanged = onPasswordChanged,
             isPassword = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
 
         Spacer(
@@ -84,9 +95,13 @@ fun LoginScreen(
 
         Button(
             onClick = onLoginClicked,
-            enabled = !isLoading,
+            enabled = isButtonEnabled,
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp)
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Primary,
+                contentColor = OnPrimary
+            )
         ) {
             Text(
                 text = "Log In",
@@ -100,7 +115,7 @@ fun LoginScreen(
         )
 
         ClickableText(
-            text = AnnotatedString("Don't have an account? Sign up"),
+            text = AnnotatedString("Don't have an account?"),
             onClick = { offset ->
                 val fullText = "Don't have an account? Sign up"
                 val startIndex = fullText.indexOf("Sign up")
@@ -110,8 +125,12 @@ fun LoginScreen(
 //                    navController.navigate("registration")
                 }
             },
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            style = androidx.compose.ui.text.TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontStyle = Typography.bodySmall.fontStyle,
+                color = Primary
+            ),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
     }
 }
