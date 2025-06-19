@@ -67,7 +67,8 @@ class HttpClientFactory(
                         if(response is Result.Success) {
                             val newAuthInfo = AuthInfo(
                                 accessToken = response.data.accessToken,
-                                refreshToken = info?.refreshToken ?: "",
+                                refreshToken = response.data.refreshToken,
+                                username = info?.username ?: ""
                             )
                             sessionStorage.set(newAuthInfo)
 
