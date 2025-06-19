@@ -1,9 +1,11 @@
 package com.mobiledevcampus.notemark.auth.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -12,6 +14,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +36,11 @@ fun LoginScreen(
     errorMessage: String? = null,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(
+        modifier = modifier
+            .padding(16.dp)
+            .background(Color.White)
+    ) {
         Text(
             text = "Log In",
             fontFamily = SpaceGrotesk,
@@ -78,12 +85,13 @@ fun LoginScreen(
         Button(
             onClick = onLoginClicked,
             enabled = !isLoading,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp)
         ) {
             Text(
                 text = "Log In",
                 fontFamily = Inter,
-                style = Typography.bodyLarge
+                style = Typography.bodyMedium
             )
         }
 
