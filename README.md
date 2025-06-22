@@ -1,7 +1,12 @@
 # NoteMark
 
 
-## Project Structure
+## Setup
+
+Edit local properties with the following variables
+- campusEmail=<YOUR_CAMPUS_EMAIL>
+
+## Project Structure Ideas
 
 - root
   - core
