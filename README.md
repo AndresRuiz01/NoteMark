@@ -38,6 +38,6 @@ Edit local properties with the following variables
       - registration
       - login
   - notes
-  -   data
-  -   domain
-  -   presentation
+    - data
+    - domain
+    - presentation
