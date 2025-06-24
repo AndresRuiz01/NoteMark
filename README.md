@@ -37,3 +37,7 @@ Edit local properties with the following variables
     - presentation
       - registration
       - login
+  - notes
+  -   data
+  -   domain
+  -   presentation
