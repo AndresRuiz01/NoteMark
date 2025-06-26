@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobiledevcampus.notemark.core.presentation.design_system.NoteMarkTheme
+import com.mobiledevcampus.notemark.core.presentation.design_system.OnSurfaceVariant
 
 
 @Composable
@@ -96,7 +97,15 @@ fun NoteMarkTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
+                .border(
+                    width = 1.dp,
+                    color = if (isFocused) MaterialTheme.colorScheme.primary else if (hasError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.OnSurfaceVariant,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .background(
+                    color = if (isFocused) Color.White else MaterialTheme.colorScheme.OnSurfaceVariant,
+                    shape = RoundedCornerShape(12.dp)
+                )
         ) {
             BasicTextField(
                 value = text,
@@ -135,7 +144,7 @@ fun NoteMarkTextField(
         }
 
         AnimatedVisibility(
-            visible = isFocused ||  hasError,
+            visible = (isFocused && activeText.isNotEmpty()) || (!isFocused && hasError && errorText.isNotEmpty()),
             enter = expandVertically(),
             exit = shrinkVertically()
 
