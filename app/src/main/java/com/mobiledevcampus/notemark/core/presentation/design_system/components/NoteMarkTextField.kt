@@ -103,7 +103,7 @@ fun NoteMarkTextField(
                 onValueChange = onTextChanged,
                 textStyle = MaterialTheme.typography.bodyLarge,
                 singleLine = true,
-                visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+                visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation(mask = '*') else VisualTransformation.None,
                 keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
                 decorationBox = {
                     if (text.isEmpty()) {
