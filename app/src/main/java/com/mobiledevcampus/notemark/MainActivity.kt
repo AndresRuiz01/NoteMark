@@ -68,6 +68,7 @@ class MainActivity : ComponentActivity() {
                             activeText = "Use 8+ characters with a number or symbol for better security",
                             errorText = "Password must be at least 8 characters and include a number or symbol",
                             hasError = hasPasswordError,
+                            isPassword = true,
                         )
                     }
                 }

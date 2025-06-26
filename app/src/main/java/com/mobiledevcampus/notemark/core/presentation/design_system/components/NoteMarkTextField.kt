@@ -77,6 +77,7 @@ fun NoteMarkTextField(
     activeText: String,
     errorText: String,
     hasError: Boolean,
+    isPassword: Boolean = false,
     focusRequester: FocusRequester = FocusRequester()
 ) {
     var isFocused by rememberSaveable { mutableStateOf(false) }
@@ -102,6 +103,8 @@ fun NoteMarkTextField(
                 onValueChange = onTextChanged,
                 textStyle = MaterialTheme.typography.bodyLarge,
                 singleLine = true,
+                visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+                keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
                 decorationBox = {
                     if (text.isEmpty()) {
                         Text(
@@ -119,7 +122,16 @@ fun NoteMarkTextField(
                         isFocused = state.isFocused
                     }
                     .focusRequester(focusRequester)
+                    .weight(1f)
             )
+            if (isPassword) {
+                val icon = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                IconButton(
+                    onClick = { passwordVisible = !passwordVisible },
+                ) {
+                    Icon(imageVector = icon, contentDescription = "Toggle password visibility")
+                }
+            }
         }
 
         AnimatedVisibility(
