@@ -40,6 +40,8 @@ class MainActivity : ComponentActivity() {
                     var username by remember { mutableStateOf("") }
                     val hasUsernameError by remember { derivedStateOf { username.length < 3  && username.isNotEmpty() } }
                     var password by remember { mutableStateOf("") }
+                    val hasPasswordError by remember { derivedStateOf { password.length >= 8 } }
+
 
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -65,7 +67,7 @@ class MainActivity : ComponentActivity() {
                             title = "Password",
                             activeText = "Use 8+ characters with a number or symbol for better security",
                             errorText = "Password must be at least 8 characters and include a number or symbol",
-                            hasError = true,
+                            hasError = hasPasswordError,
                         )
                     }
                 }

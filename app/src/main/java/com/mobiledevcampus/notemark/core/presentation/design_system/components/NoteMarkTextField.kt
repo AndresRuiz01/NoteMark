@@ -1,6 +1,10 @@
 package com.mobiledevcampus.notemark.core.presentation.design_system.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -118,20 +122,16 @@ fun NoteMarkTextField(
             )
         }
 
-        if (isFocused) {
-            Text(
-                text = activeText,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant ,
-                modifier = Modifier.padding(start = 12.dp)
-            )
-        }
+        AnimatedVisibility(
+            visible = isFocused ||  hasError,
+            enter = expandVertically(),
+            exit = shrinkVertically()
 
-        if (hasError && !isFocused) {
+        ) {
             Text(
-                text = errorText,
+                text = if (isFocused) activeText else if (hasError) errorText else " ",
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.error,
+                color = if (isFocused) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(start = 12.dp)
             )
         }
